@@ -1,0 +1,12 @@
+[Unit]
+Description=Automatic 3proxy service
+After=sleep30sec.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/local/bin/auto3proxy/start3proxy.sh
+ExecStop=/usr/local/bin/auto3proxy/stop3proxy.sh
+
+[Install]
+WantedBy=multi-user.target

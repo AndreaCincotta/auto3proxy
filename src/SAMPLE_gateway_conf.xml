@@ -1,0 +1,33 @@
+<root>
+<!--
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% IMPORTANT: %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+This is a sample configuration file, the service needs a file named "gateway_conf.xml"
+copy or rename this file with the aforementioned name and insert your data.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+-->
+    <Gateways>
+        <!--
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% IMPORTANT: %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        masks must be in the form "xxx.xxx.xxx.0/24", use unique masks for each dongle
+        gateway_mapped must be equal to "gateway<N>" with <N> being a unique positive integer
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        -->
+        <Gateway mask="192.168.10.0/24"	gateway_mapped="gateway1"	name="Mario" />
+        <Gateway mask="192.168.20.0/24"	gateway_mapped="gateway2"	name="Luigi" />
+        <Gateway mask="192.168.30.0/24"	gateway_mapped="gateway3"	name="Pippo" />
+        <Gateway mask="192.168.40.0/24"	gateway_mapped="gateway4"	name="Franco" />
+    </Gateways>
+    <Proxy>
+        <!--
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% IMPORTANT: %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        Make sure that the username specified in /usr/local/3proxy/conf/passwd matches, that
+        file will NOT be updated automatically after a change in this configuration xml.
+        
+        Remember to enable port forwarding on your modem starting from base_port+1 up to
+        base_port+N, with N being the maximum number of dongles used.
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        -->
+        <username>myproxyusername</username>
+        <base_port>2000</base_port>
+    </Proxy>
+</root>

@@ -1,0 +1,44 @@
+#!/bin/bash
+GET_PRIVILAGE(){
+    echo "VERIFYING PRIVILEGE"
+    if [[ "${EUID}" == 0 ]]; then
+        printf "ROOT CONFIRMED\n" >> $LOGFILE
+    else
+        printf "ERROR ADMIN MUST RUN UNDER ROOT SU PRIVILAGE\n"
+        exit 77
+    fi
+}
+GET_PRIVILAGE
+
+rm -rf /etc/proxidize &>> /dev/null
+rm -rf /var/www/proxidize &>> /dev/null
+rm -rf /etc/px_logs &>> /dev/null
+rm -rf /etc/pxbackup &>> /dev/null
+rm -rf /etc/pxbackup1 &>> /dev/null
+rm -rf /etc/integrity-manager &>> /dev/null
+rm /etc/pxcr &>> /dev/null
+rm /etc/apache2/sites-available/proxidize.conf &>> /dev/null
+rm /etc/integrity-manager.log &>> /dev/null
+rm /var/log/proxidize* &>> /dev/null
+rm /etc/prepare &>> /dev/null
+rm /etc/ums_custom &>> /dev/null
+kill -9 $(ps aux | grep pxproxy | grep -v "color=auto"  | awk '{print $2}')
+for pid in $(ps -ef | awk '/\/etc\/proxidize\/resources\// {print $2}'); 
+    do kill -9 $pid; 
+done
+rm /etc/dhcpcd.enter-hook &>> /dev/null
+rm /etc/dhcpcd.exit-hook &>> /dev/null
+rm /etc/ha-modem &>> /dev/null
+crontab -u root -r &>> /dev/null
+crontab -u proxidize -r &>> /dev/null
+crontab -u www-data -r &>> /dev/null
+rm -f /usr/bin/proxidize-install &>> /dev/null
+rm -f /usr/bin/proxidize &>> /dev/null
+service sms_webhook stop &>> /dev/null
+rm -f /etc/systemd/system/sms_webhook.service &>> /dev/null
+systemctl stop mysql &>> /dev/null
+apt remove mysql-server mysql-client &>> /dev/null
+apt purge mysql* --yes  &>> /dev/null
+apt purge mariadb* --yes  &>> /dev/null
+rm -rf /etc/mysql &>> /dev/null
+rm -rf /var/lib/mysql &>> /dev/null
